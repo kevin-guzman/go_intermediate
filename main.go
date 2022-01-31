@@ -29,10 +29,10 @@ type EMAILNotification struct {
 }
 
 func (EMAILNotification) SendNotification() {
-	fmt.Println("Se está enviando la notif via SMS")
+	fmt.Println("Se está enviando la notif via EMAIL")
 }
 func (EMAILNotification) GetSender() ISender {
-	return SMSNotificationSender{}
+	return EMAILNotificationSender{}
 }
 
 // ---- Sender ----- //
