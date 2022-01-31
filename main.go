@@ -2,49 +2,49 @@ package main
 
 import "fmt"
 
+type Person struct {
+	name string
+	age  int
+}
+
+type Printer interface {
+	getMessage() string
+}
+
 type Employee struct {
-	id       int
-	name     string
-	vacation bool
+	id int
 }
 
-func NewEmployee(id int, name string, vacation bool) *Employee {
-	return &Employee{
-		id:       id,
-		name:     name,
-		vacation: vacation,
-	}
+type TemporaryEmployee struct {
+	Person
+	Employee
+	taxRate int
 }
 
-func (e *Employee) SetId(id int) {
-	e.id = id
+type FullTimeEmployee struct {
+	Person
+	Employee
+	endDate string
 }
 
-func (e *Employee) SetName(name string) {
-	e.name = name
+func (ftEmployee FullTimeEmployee) getMessage() string {
+	return "FT message"
 }
 
-func (e Employee) GetId() int {
-	return e.id
+func (ttEmployee TemporaryEmployee) getMessage() string {
+	return "TT message"
 }
 
-func (e Employee) GetName() string {
-	return e.name
+func getMessage(p Printer) {
+	fmt.Println("Message->", p.getMessage())
 }
 
 func main() {
-	e := Employee{}
-	fmt.Println("Employee without id, name ", e)
-	e.SetId(20)
-	e.SetName("Wey")
-	fmt.Println("Employee with setted values ", e)
-	fmt.Println("Getted name by method ", e.GetName())
-	fmt.Println("Getted id by method ", e.GetId())
-	// new - returns pointer
-	e2 := new(Employee)
-	e2.name = "Kevin"
-	fmt.Println("New ->", e2)
-	// constructor
-	e3 := NewEmployee(12, "kevin_", false)
-	fmt.Println("Constructor ->", e3)
+	fe := FullTimeEmployee{}
+	fe.age = 12
+	fe.id = 1
+	fe.name = "Kevin"
+	getMessage(fe)
+	te := TemporaryEmployee{}
+	getMessage(te)
 }
