@@ -18,7 +18,16 @@ func printNames(names ...string) {
 	}
 }
 
+func getValues(x int) (double int, triple int, cuadruple int) {
+	double = 2 * x
+	triple = 3 * x
+	cuadruple = 4 * x
+	return
+}
+
 func main() {
 	fmt.Println(sum(1, 2, 1, 1))
 	printNames("Kevin", "Manolo", "Juanita", "Ashole")
+	// Retornos con nombre
+	getValues(2)
 }
