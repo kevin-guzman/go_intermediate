@@ -2,21 +2,23 @@ package main
 
 import (
 	"fmt"
-	"time"
 )
 
+func sum(values ...int) int {
+	total := 0
+	for _, number := range values {
+		total += number
+	}
+	return total
+}
+
+func printNames(names ...string) {
+	for _, name := range names {
+		fmt.Println(name)
+	}
+}
+
 func main() {
-	// x := 5
-	// y := func() int {
-	// 	return x * 2
-	// }()
-	// fmt.Println(y)
-	c := make(chan int)
-	go func() {
-		fmt.Println("Sleeping")
-		time.Sleep(time.Second * 2)
-		fmt.Println("Awake")
-		c <- 1
-	}()
-	<-c
+	fmt.Println(sum(1, 2, 1, 1))
+	printNames("Kevin", "Manolo", "Juanita", "Ashole")
 }
